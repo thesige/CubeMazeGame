@@ -8,7 +8,7 @@ public class View1 extends DefaultView{
 	public View1() {
 		bt111 = new Bauteil11(1);
 		bt111.setBounds(0, 0, 10, 10);
-		super.add(bt111);
+		//super.add(bt111);
 		
 		
 		

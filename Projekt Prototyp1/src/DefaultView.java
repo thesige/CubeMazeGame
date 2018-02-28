@@ -9,6 +9,7 @@ public class DefaultView extends JFrame implements KeyListener{
 		this.setTitle("Programm");
 		addKeyListener(this);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	public void run(int direction, int steps){
