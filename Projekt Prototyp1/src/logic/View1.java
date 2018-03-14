@@ -19,7 +19,7 @@ public class View1 extends DefaultView{
 
 	public void run(int direction){
 		if (bt111.bl(direction) == true){
-			super.run(direction, 1);
+			super.run(direction);
 		}
 	}
 }
