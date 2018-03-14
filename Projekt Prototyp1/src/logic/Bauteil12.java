@@ -17,8 +17,7 @@ public abstract class Bauteil12 implements BComponent{
 			case 2:
 			case 4: return true;
 			}
-		} else {
-			return false;
-		}
+		} 
+		return  false;
 	}
 }
