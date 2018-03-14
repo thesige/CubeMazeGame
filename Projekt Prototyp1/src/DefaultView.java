@@ -10,10 +10,35 @@ public class DefaultView extends JFrame implements KeyListener{
 		addKeyListener(this);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.view1();
 	}
 	
 	public void run(int direction, int steps){
 		
+	}
+	
+	public void view1(){
+		View1 v1 = new View1();
+	}
+	
+	public void view2(){
+		View2 v2 = new View2();
+	}
+
+	public void view3(){
+		View3 v3 = new View3();
+	}
+	
+	public void view4(){
+		View4 v4 = new View4();
+	}
+	
+	public void view5(){
+		View5 v5 = new View5();
+	}
+	
+	public void view6(){
+		View6 v6 = new View6();
 	}
 	
 	@Override
