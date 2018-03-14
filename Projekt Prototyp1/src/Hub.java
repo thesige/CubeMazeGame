@@ -21,7 +21,7 @@ public class Hub extends JFrame implements ActionListener {
 	public void actionPerformed (ActionEvent e){
 		if (e.getSource() == b1){
 			this.dispose();
-			DefaultView v = new View1();
+			DefaultView v = new DefaultView();
 		}
 	}
 }
