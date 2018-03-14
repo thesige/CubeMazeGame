@@ -1,4 +1,7 @@
+package gui;
 import javax.swing.*;
+
+import logic.Bauteil12;
 
 public class Bauteil11 extends JFrame {
 

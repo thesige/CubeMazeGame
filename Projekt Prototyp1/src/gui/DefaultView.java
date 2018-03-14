@@ -1,5 +1,12 @@
+package gui;
 import java.awt.event.*;
 import javax.swing.*;
+import logic.View1;
+import logic.View2;
+import logic.View3;
+import logic.View4;
+import logic.View5;
+import logic.View6;
 
 public class DefaultView extends JFrame implements KeyListener{
 	

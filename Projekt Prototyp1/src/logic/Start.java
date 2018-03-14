@@ -1,3 +1,5 @@
+package logic;
+import gui.Hub;
 
 public class Start {
 

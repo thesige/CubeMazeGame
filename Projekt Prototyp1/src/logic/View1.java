@@ -1,5 +1,8 @@
-import java.awt.event.KeyListener;
-import javax.swing.*;
+package logic;
+
+
+import gui.Bauteil11;
+import gui.DefaultView;
 
 public class View1 extends DefaultView{
 	
