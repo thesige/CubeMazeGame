@@ -1,7 +1,7 @@
 package logic;
 
 //Street
-public class Bauteil12 {
+public abstract class Bauteil12 implements BComponent{
 
 	public boolean bl(int direction, int alignment){
 		if(alignment > 2){
