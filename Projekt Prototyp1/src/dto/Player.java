@@ -1,29 +1,22 @@
 package dto;
 
+import java.awt.Point;
+
 public class Player {
 
-	private int x, y;
+	private static Point POSITION;
 
-	public Player(int x, int y) {
+	public Player(Point pOSITION) {
 		super();
-		this.x = x;
-		this.y = y;
+		POSITION = pOSITION;
 	}
 
-	public int getX() {
-		return x;
+	public static Point getPOSITION() {
+		return POSITION;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public static void setPOSITION(Point pOSITION) {
+		POSITION = pOSITION;
 	}
 	
 }

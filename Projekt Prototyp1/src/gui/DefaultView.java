@@ -1,75 +1,74 @@
 package gui;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.*;
 import javax.swing.*;
-import dto.Player;
-import logic.View1;
-import logic.View2;
-import logic.View3;
-import logic.View4;
-import logic.View5;
-import logic.View6;
 
+import dto.Config;
+import logic.MapBuilder;
+import logic.PlayerMoving;
+
+@SuppressWarnings("serial")
 public class DefaultView extends JFrame implements KeyListener{
-	
-	Player p;
-	View1 v1;
-	View2 v2;
-	View3 v3;
-	View4 v4;
-	View5 v5;
-	View6 v6;
+	JPanel side;
+	Config conf = new dto.Config();
+	MapBuilder mapBuilder = new logic.MapBuilder();
 	
 	public DefaultView() {
-		this.setLayout(null);
+		this.setLayout(new GridLayout(1, 1));
 		this.setSize(500, 500);
-		this.setTitle("Programm");
+		this.setTitle("RubiksMaze");
 		addKeyListener(this);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		p = new Player(0, 0);
-		this.view1();
-	}
-	
-	public void run(int direction){
 		
+		dto.Player.setPOSITION(new Point(0, 0));
+		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
+		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
+		this.add(side);
+		displayNewField();
 	}
 	
-	public void view1(){
-		this.v1 = new View1();
+	public void displayNewField() {
+		System.out.println("build");
+		side.removeAll();
+		for(int x = 0; x < conf.FIELD_SIZE; x++) {
+			for(int y = 0; y < conf.FIELD_SIZE; y++) {
+				side.add(getImageAsLabel(x, y));
+			}
+		}
+		this.setVisible(true);
 	}
 	
-	public void view2(){
-		this.v2 = new View2();
-	}
-
-	public void view3(){
-		this.v3 = new View3();
+	private JLabel getImageAsLabel(int x, int y) {
+		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, x, y))));
 	}
 	
-	public void view4(){
-		this.v4 = new View4();
-	}
-	
-	public void view5(){
-		this.v5 = new View5();
-	}
-	
-	public void view6(){
-		this.v6 = new View6();
+	public void showEnd() {
+		this.dispose();
+		@SuppressWarnings("unused")
+		End end = new End();
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
+		PlayerMoving playerMoving = new logic.PlayerMoving();
+		int direction = 0;
 		switch (arg0.getKeyCode()){
-		case KeyEvent.VK_LEFT:
-		break;
-		case KeyEvent.VK_UP: 
-		break;
-		case KeyEvent.VK_RIGHT: 
-		break;
-		case KeyEvent.VK_DOWN: 
-		break;
+			case KeyEvent.VK_LEFT:
+				direction = 4;
+				break;
+			case KeyEvent.VK_UP:
+				direction = 1;
+				break;
+			case KeyEvent.VK_RIGHT:
+				direction = 2;
+				break;
+			case KeyEvent.VK_DOWN:
+				direction = 3;
+				break;
 		}
+		playerMoving.validateMove(this, conf, direction);
 	}
 
 	@Override

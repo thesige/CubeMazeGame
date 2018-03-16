@@ -1,6 +1,11 @@
 package logic;
 
-public interface BComponent {
+public abstract interface BComponent {
+	
+	String img = null;
 
-	public boolean bl(int direction, int alignment);
+	public boolean canWalk(int alignment);
+	
+	public boolean isExit();
+	public String getImage();
 }
