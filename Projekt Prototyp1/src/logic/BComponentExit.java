@@ -21,4 +21,12 @@ public class BComponentExit implements BComponent{
     public String getImage() {
 		return this.img;
 	}
+
+	@Override
+	public void replaceWithPlayer() {
+	}
+
+	@Override
+	public void replaceNoPlayer() {
+	}
 }

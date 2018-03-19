@@ -12,15 +12,7 @@ public class BComponentCorner implements BComponent{
         }else {
         	this.alignment = alignment;
         }
-		if(alignment == 1) {
-			this.img = "/dto/Corner1.png";
-		}else if(alignment == 2) {
-			this.img = "/dto/Corner2.png";
-		}else if(alignment == 3) {
-			this.img = "/dto/Corner3.png";
-		}else {
-			this.img = "/dto/Corner4.png";
-		}
+		replaceNoPlayer();
 	}
 	
     public boolean canWalk(int direction){
@@ -54,5 +46,41 @@ public class BComponentCorner implements BComponent{
 
 	public String getImage() {
 		return this.img;
+	}
+
+	@Override
+	public void replaceWithPlayer() {
+		switch(this.alignment) {
+		case 1:
+			this.img = "/dto/Corner2player.png";
+			break;
+		case 2:
+			this.img = "/dto/Corner3player.png";
+			break;
+		case 3:
+			this.img = "/dto/Corner4player.png";
+			break;
+		case 4:
+			this.img = "/dto/Corner1player.png";
+			break;
+	}
+	}
+
+	@Override
+	public void replaceNoPlayer() {
+		switch(this.alignment) {
+		case 1:
+			this.img = "/dto/Corner2.png";
+			break;
+		case 2:
+			this.img = "/dto/Corner3.png";
+			break;
+		case 3:
+			this.img = "/dto/Corner4.png";
+			break;
+		case 4:
+			this.img = "/dto/Corner1.png";
+			break;
+	}
 	}
 }

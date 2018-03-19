@@ -7,16 +7,15 @@ public class BComponentStreet implements BComponent{
 	
 	public BComponentStreet(int alignment) {
 		super();
+		if(alignment < 1) {
+			alignment = 1;
+		}
 		if(alignment > 2){
 			this.alignment = alignment % 2;
 		}else {
 			this.alignment = alignment;
 		}
-		if(this.alignment == 2) {
-			this.img = "/dto/Street1.png";
-		}else {
-			this.img = "/dto/Street2.png";
-		}
+		replaceNoPlayer();
 	}
 	
 	public boolean canWalk(int direction){
@@ -40,5 +39,29 @@ public class BComponentStreet implements BComponent{
 	
 	public String getImage() {
 		return this.img;
+	}
+
+	@Override
+	public void replaceWithPlayer() {
+		switch(this.alignment) {
+		case 1:
+			this.img = "/dto/Street1player.png";
+			break;
+		case 2:
+			this.img = "/dto/Street2player.png";
+			break;
+		}
+	}
+
+	@Override
+	public void replaceNoPlayer() {
+		switch(this.alignment) {
+		case 1:
+			this.img = "/dto/Street1.png";
+			break;
+		case 2:
+			this.img = "/dto/Street2.png";
+			break;
+		}
 	}
 }

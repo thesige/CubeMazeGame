@@ -9,66 +9,73 @@ import gui.DefaultView;
 public class PlayerMoving {
 	MapBuilder mapBuilder = new logic.MapBuilder();
 	
-	public boolean validateMove(DefaultView view, Config conf, int direction) {
+	public void validateMove(DefaultView view, Config conf, int direction) {
 		int x = dto.Player.getPOSITION().x;
 		int y = dto.Player.getPOSITION().y;
-		System.out.println(x);
-		System.out.println(y);
 		//Checks if we can walk, else stay here
-		if(getActualComponent(conf, x, y).isExit()) {
-			view.showEnd();
-		}else if(getActualComponent(conf, x, y).canWalk(direction)) {
-			System.out.println("movig");
+		if(getActualComponent(conf, x, y).canWalk(direction)) {
 			switch(direction){
 				case 1: //up
 					if(y + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-						dto.Player.setPOSITION(new Point(x, 0));
-						view.displayNewField();
+						createField(view, conf, x, 0);
 					}else {
-						dto.Player.setPOSITION(new Point(x, y + 1));
+						updateField(view, conf, x, y, x, y + 1);
 					}
 					break;
 				case 2: //right
 					if(x + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-						dto.Player.setPOSITION(new Point(0, y));
-						view.displayNewField();
+						createField(view, conf, 0, y);
 					}else {
-						dto.Player.setPOSITION(new Point(x + 1, y));
+						updateField(view, conf, x, y, x + 1, y);
 					}
 					break;
 				case 3: //down
 					if(y - 1 < 0) {
 						//Generate new Side
-						conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-						dto.Player.setPOSITION(new Point(x, conf.FIELD_SIZE - 1));
-						view.displayNewField();
+						createField(view, conf, x, conf.FIELD_SIZE - 1);
 					}else {
-						dto.Player.setPOSITION(new Point(x, y - 1));
+						updateField(view, conf, x, y, x, y - 1);
 					}
 					break;
 				case 4: //left
 					if(x - 1 < 0) {
 						//Generate new Side
-						conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-						dto.Player.setPOSITION(new Point(conf.FIELD_SIZE - 1, y));
-						view.displayNewField();
+						createField(view, conf, conf.FIELD_SIZE - 1, y);
 					}else {
-						dto.Player.setPOSITION(new Point(x - 1, y));
+						updateField(view, conf, x, y, x - 1, y);
 					}
 					break;
 				default: //wrong input
 					break;
 			}
 		}
-		return false;
+		if(getActualComponent(conf, x, y).isExit()) {
+			view.showEnd();
+		}
 	}
 	
 	private BComponent getActualComponent(Config conf, int x, int y) {
 		BComponent Actual = conf.CurrentMapArray[x][y];
 		return Actual;
+	}
+	
+	private void updatePlayerPosition(Config conf, int x, int y) {
+		conf.CurrentMapArray[x][y].replaceWithPlayer();
+	}
+	
+	private void createField(DefaultView view, Config conf, int x, int y) {
+		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
+		dto.Player.setPOSITION(new Point(x, y));
+		updatePlayerPosition(conf, x, y);
+		view.displayNewField();
+	}
+	
+	private void updateField(DefaultView view, Config conf, int oldX, int oldY, int newX, int newY) {
+		dto.Player.setPOSITION(new Point(newX, newY));
+		conf.CurrentMapArray[oldX][oldY].replaceNoPlayer();
+		updatePlayerPosition(conf, newX, newY);
+		view.displayNewField();
 	}
 }

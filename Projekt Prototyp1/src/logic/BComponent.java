@@ -8,4 +8,6 @@ public abstract interface BComponent {
 	
 	public boolean isExit();
 	public String getImage();
+	public void replaceWithPlayer();
+	public void replaceNoPlayer();
 }

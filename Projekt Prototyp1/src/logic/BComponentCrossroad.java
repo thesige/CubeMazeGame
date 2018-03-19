@@ -8,7 +8,7 @@ public class BComponentCrossroad implements BComponent{
 	
 	public BComponentCrossroad(int alignment) {
 		super();
-		this.img = "/dto/Crossroad.png";
+		replaceNoPlayer();
 	}
 	
     public boolean canWalk(int direction){
@@ -21,5 +21,15 @@ public class BComponentCrossroad implements BComponent{
     
     public String getImage() {
 		return this.img;
+	}
+
+	@Override
+	public void replaceWithPlayer() {
+		this.img = "/dto/Crossroadplayer.png";
+	}
+
+	@Override
+	public void replaceNoPlayer() {
+		this.img = "/dto/Crossroad.png";
 	}
 }

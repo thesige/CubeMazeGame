@@ -16,21 +16,22 @@ public class DefaultView extends JFrame implements KeyListener{
 	
 	public DefaultView() {
 		this.setLayout(new GridLayout(1, 1));
-		this.setSize(500, 500);
+		this.setSize(1700, 1700);
 		this.setTitle("RubiksMaze");
 		addKeyListener(this);
 		this.setVisible(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		dto.Player.setPOSITION(new Point(0, 0));
+		dto.Player.setPOSITION(new Point(1, 1));
 		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
+		conf.CurrentMapArray[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
 		this.add(side);
 		displayNewField();
 	}
 	
 	public void displayNewField() {
-		System.out.println("build");
 		side.removeAll();
 		for(int x = 0; x < conf.FIELD_SIZE; x++) {
 			for(int y = 0; y < conf.FIELD_SIZE; y++) {
@@ -56,16 +57,16 @@ public class DefaultView extends JFrame implements KeyListener{
 		int direction = 0;
 		switch (arg0.getKeyCode()){
 			case KeyEvent.VK_LEFT:
-				direction = 4;
+				direction = 3;
 				break;
 			case KeyEvent.VK_UP:
-				direction = 1;
+				direction = 4;
 				break;
 			case KeyEvent.VK_RIGHT:
-				direction = 2;
+				direction = 1;
 				break;
 			case KeyEvent.VK_DOWN:
-				direction = 3;
+				direction = 2;
 				break;
 		}
 		playerMoving.validateMove(this, conf, direction);
