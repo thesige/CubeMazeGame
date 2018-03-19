@@ -20,7 +20,7 @@ public class PlayerMoving {
 						//Generate new Side
 						createField(view, conf, x, 0);
 					}else {
-						updateField(view, conf, x, y, x, y + 1);
+						updateField(view, conf, x, y, x, y + 1, direction);
 					}
 					break;
 				case 2: //right
@@ -28,7 +28,7 @@ public class PlayerMoving {
 						//Generate new Side
 						createField(view, conf, 0, y);
 					}else {
-						updateField(view, conf, x, y, x + 1, y);
+						updateField(view, conf, x, y, x + 1, y, direction);
 					}
 					break;
 				case 3: //down
@@ -36,7 +36,7 @@ public class PlayerMoving {
 						//Generate new Side
 						createField(view, conf, x, conf.FIELD_SIZE - 1);
 					}else {
-						updateField(view, conf, x, y, x, y - 1);
+						updateField(view, conf, x, y, x, y - 1, direction);
 					}
 					break;
 				case 4: //left
@@ -44,7 +44,7 @@ public class PlayerMoving {
 						//Generate new Side
 						createField(view, conf, conf.FIELD_SIZE - 1, y);
 					}else {
-						updateField(view, conf, x, y, x - 1, y);
+						updateField(view, conf, x, y, x - 1, y, direction);
 					}
 					break;
 			}
@@ -61,23 +61,39 @@ public class PlayerMoving {
 	}
 	
 	private void createField(DefaultView view, Config conf, int x, int y) {
+		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
 		if(getActualComponent(conf, x, y).isExit()) {
 			view.showEnd();
 		}else {
-			conf.CurrentMapArray = mapBuilder.BuildMap(conf);
 			dto.Player.setPOSITION(new Point(x, y));
 			updatePlayerPosition(conf, x, y);
 			view.displayNewField();
 		}
 	}
 	
-	private void updateField(DefaultView view, Config conf, int oldX, int oldY, int newX, int newY) {
-		dto.Player.setPOSITION(new Point(newX, newY));
-		conf.CurrentMapArray[oldX][oldY].replaceNoPlayer();
-		updatePlayerPosition(conf, newX, newY);
-		view.displayNewField();
-		if(getActualComponent(conf, newX, newY).isExit()) {
-			view.showEnd();
+	private void updateField(DefaultView view, Config conf, int oldX, int oldY, int newX, int newY, int direction) {
+		switch(direction) {
+		case 1:
+			direction = 3;
+			break;
+		case 2:
+			direction = 4;
+			break;
+		case 3:
+			direction = 1;
+			break;
+		case 4:
+			direction = 2;
+			break;
+		}
+		if(getActualComponent(conf, newX, newY).canWalk(direction)) {
+			dto.Player.setPOSITION(new Point(newX, newY));
+			conf.CurrentMapArray[oldX][oldY].replaceNoPlayer();
+			updatePlayerPosition(conf, newX, newY);
+			view.displayNewField();
+			if(getActualComponent(conf, newX, newY).isExit()) {
+				view.showEnd();
+			}
 		}
 	}
 }

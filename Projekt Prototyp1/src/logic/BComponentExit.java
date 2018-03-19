@@ -11,7 +11,7 @@ public class BComponentExit implements BComponent{
 	}
 	
     public boolean canWalk(int direction){
-        return false;
+        return true;
     }
     
     public boolean isExit() {
