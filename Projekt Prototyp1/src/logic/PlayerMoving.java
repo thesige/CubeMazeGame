@@ -47,12 +47,7 @@ public class PlayerMoving {
 						updateField(view, conf, x, y, x - 1, y);
 					}
 					break;
-				default: //wrong input
-					break;
 			}
-		}
-		if(getActualComponent(conf, x, y).isExit()) {
-			view.showEnd();
 		}
 	}
 	
@@ -66,10 +61,14 @@ public class PlayerMoving {
 	}
 	
 	private void createField(DefaultView view, Config conf, int x, int y) {
-		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-		dto.Player.setPOSITION(new Point(x, y));
-		updatePlayerPosition(conf, x, y);
-		view.displayNewField();
+		if(getActualComponent(conf, x, y).isExit()) {
+			view.showEnd();
+		}else {
+			conf.CurrentMapArray = mapBuilder.BuildMap(conf);
+			dto.Player.setPOSITION(new Point(x, y));
+			updatePlayerPosition(conf, x, y);
+			view.displayNewField();
+		}
 	}
 	
 	private void updateField(DefaultView view, Config conf, int oldX, int oldY, int newX, int newY) {
@@ -77,5 +76,8 @@ public class PlayerMoving {
 		conf.CurrentMapArray[oldX][oldY].replaceNoPlayer();
 		updatePlayerPosition(conf, newX, newY);
 		view.displayNewField();
+		if(getActualComponent(conf, newX, newY).isExit()) {
+			view.showEnd();
+		}
 	}
 }

@@ -10,12 +10,12 @@ public class MapBuilder {
 			for(int i = 0; i < conf.FIELD_SIZE; i++) {
 				int RandomExit = (int)(Math.random() * (6 * (conf.FIELD_SIZE * conf.FIELD_SIZE)));
 				if(RandomExit == 0) {
-					b[j][i] = new BComponentExit(0);
+					b[j][i] = new BComponentExit(1);
 				}else {
 					int RandomBComponent = (int)(Math.random() * 4 + 1);
 					switch(RandomBComponent) {
 						case 1:
-							b[j][i] = new BComponentStreet((int)(Math.random() * 4 + 1));
+							b[j][i] = new BComponentStreet((int)(Math.random() * 2 + 1));
 							break;
 						case 2:
 							b[j][i] = new BComponentCorner((int)(Math.random() * 4 + 1));
@@ -24,7 +24,7 @@ public class MapBuilder {
 							b[j][i] = new BComponentBranch((int)(Math.random() * 4 + 1));
 							break;
 						case 4:
-							b[j][i] = new BComponentCrossroad((int)(Math.random() * 4 + 1));
+							b[j][i] = new BComponentCrossroad(1);
 							break;
 					}
 				}

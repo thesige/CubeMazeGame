@@ -7,11 +7,7 @@ public class BComponentBranch implements BComponent{
 	
 	public BComponentBranch(int alignment) {
 		super();
-		if(alignment > 4){
-            alignment = alignment % 4;
-        }else {
-        	this.alignment = alignment;
-        }
+		this.alignment = alignment;
 		replaceNoPlayer();
 	}
 	

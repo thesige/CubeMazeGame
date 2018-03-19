@@ -7,11 +7,7 @@ public class BComponentCorner implements BComponent{
 	
 	public BComponentCorner(int alignment) {
 		super();
-		if(alignment > 4){
-        	this.alignment = alignment % 4;
-        }else {
-        	this.alignment = alignment;
-        }
+		this.alignment = alignment;
 		replaceNoPlayer();
 	}
 	

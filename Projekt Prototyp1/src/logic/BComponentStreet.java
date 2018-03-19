@@ -7,14 +7,7 @@ public class BComponentStreet implements BComponent{
 	
 	public BComponentStreet(int alignment) {
 		super();
-		if(alignment < 1) {
-			alignment = 1;
-		}
-		if(alignment > 2){
-			this.alignment = alignment % 2;
-		}else {
-			this.alignment = alignment;
-		}
+		this.alignment = alignment;
 		replaceNoPlayer();
 	}
 	
