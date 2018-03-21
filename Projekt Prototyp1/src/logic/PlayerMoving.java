@@ -12,13 +12,15 @@ public class PlayerMoving {
 	public void validateMove(DefaultView view, Config conf, int direction) {
 		int x = dto.Player.getPOSITION().x;
 		int y = dto.Player.getPOSITION().y;
+		int mapX = dto.Player.getMAP().x;
+		int mapY = dto.Player.getMAP().y;
 		//Checks if we can walk, else stay here
 		if(getActualComponent(conf, x, y).canWalk(direction)) {
 			switch(direction){
 				case 1: //up
 					if(y + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						createField(view, conf, new Point(dto.Player.getMAP().x, dto.Player.getMAP().y + 1), x, 0, direction);
+						createField(view, conf, new Point(mapX, mapY), new Point(mapX, mapY + 1), x, y, x, 0, direction);
 					}else {
 						updateField(view, conf, x, y, x, y + 1, direction);
 					}
@@ -26,7 +28,7 @@ public class PlayerMoving {
 				case 2: //right
 					if(x + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						createField(view, conf, new Point(dto.Player.getMAP().x + 1, dto.Player.getMAP().y), 0, y, direction);
+						createField(view, conf, new Point(mapX, mapY), new Point(mapX + 1, mapY), x, y, 0, y, direction);
 					}else {
 						updateField(view, conf, x, y, x + 1, y, direction);
 					}
@@ -34,7 +36,7 @@ public class PlayerMoving {
 				case 3: //down
 					if(y - 1 < 0) {
 						//Generate new Side
-						createField(view, conf, new Point(dto.Player.getMAP().x, dto.Player.getMAP().y - 1), x, conf.FIELD_SIZE - 1, direction);
+						createField(view, conf, new Point(mapX, mapY), new Point(mapX, mapY - 1), x, y, x, conf.FIELD_SIZE - 1, direction);
 					}else {
 						updateField(view, conf, x, y, x, y - 1, direction);
 					}
@@ -42,7 +44,7 @@ public class PlayerMoving {
 				case 4: //left
 					if(x - 1 < 0) {
 						//Generate new Side
-						createField(view, conf, new Point(dto.Player.getMAP().x - 1, dto.Player.getMAP().y), conf.FIELD_SIZE - 1, y, direction);
+						createField(view, conf, new Point(mapX, mapY), new Point(mapX - 1, mapY), x, y, conf.FIELD_SIZE - 1, y, direction);
 					}else {
 						updateField(view, conf, x, y, x - 1, y, direction);
 					}
@@ -64,7 +66,7 @@ public class PlayerMoving {
 		conf.SingleMap[x][y].replaceWithPlayer();
 	}
 	
-	private void createField(DefaultView view, Config conf, Point mapPoint, int x, int y, int direction) {
+	private void createField(DefaultView view, Config conf, Point oldMap, Point mapPoint, int oldX, int oldY, int x, int y, int direction) {
 		BComponent[][] tempMap;
 		if(conf.AllMaps.get(mapPoint) == null) {
 			conf.AllMaps.put(mapPoint, mapBuilder.BuildMap(conf));
@@ -86,6 +88,7 @@ public class PlayerMoving {
 			break;
 		}
 		if(getActualComponent(conf, x, y).canWalk(direction)) {
+			conf.AllMaps.get(new Point(oldMap))[oldX][oldY].replaceNoPlayer();
 			conf.SingleMap = tempMap;
 		}
 		
