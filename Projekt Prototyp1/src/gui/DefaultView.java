@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import dto.Config;
+import logic.BComponent;
 import logic.MapBuilder;
 import logic.PlayerMoving;
 
@@ -24,25 +25,28 @@ public class DefaultView extends JFrame implements KeyListener{
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		dto.Player.setPOSITION(new Point(1, 1));
-		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
-		conf.CurrentMapArray[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
+		dto.Player.setMAP(new Point(0, 0));
+		conf.AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(conf));
+		
+		conf.AllMaps.get(new Point(0, 0))[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
+		conf.SingleMap = conf.AllMaps.get(new Point(0, 0));
 		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
 		this.add(side);
-		displayNewField();
+		displayNewField(dto.Player.getMAP());
 	}
 	
-	public void displayNewField() {
+	public void displayNewField(Point mapPoint) {
 		side.removeAll();
 		for(int x = 0; x < conf.FIELD_SIZE; x++) {
 			for(int y = 0; y < conf.FIELD_SIZE; y++) {
-				side.add(getImageAsLabel(x, y));
+				side.add(getImageAsLabel(mapPoint, x, y));
 			}
 		}
 		this.setVisible(true);
 	}
 	
-	private JLabel getImageAsLabel(int x, int y) {
-		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, x, y))));
+	private JLabel getImageAsLabel(Point mapPoint, int x, int y) {
+		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, mapPoint, x, y))));
 	}
 	
 	public void showEnd() {

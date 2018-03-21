@@ -1,5 +1,7 @@
 package logic;
 
+import java.awt.Point;
+
 import dto.Config;
 
 public class MapBuilder {
@@ -33,8 +35,7 @@ public class MapBuilder {
 		return b;
 	}
 	
-	public String getImageAsLabel(Config conf, int x, int y) {
-		String tempImg = conf.CurrentMapArray[x][y].getImage();
-		return tempImg;
+	public String getImageAsLabel(Config conf, Point map, int x, int y) {
+		return conf.SingleMap[x][y].getImage();
 	}
 }

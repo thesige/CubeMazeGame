@@ -18,7 +18,7 @@ public class PlayerMoving {
 				case 1: //up
 					if(y + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						createField(view, conf, x, 0);
+						createField(view, conf, new Point(dto.Player.getMAP().x, dto.Player.getMAP().y + 1), x, 0, direction);
 					}else {
 						updateField(view, conf, x, y, x, y + 1, direction);
 					}
@@ -26,7 +26,7 @@ public class PlayerMoving {
 				case 2: //right
 					if(x + 1 > conf.FIELD_SIZE - 1) {
 						//Generate new Side
-						createField(view, conf, 0, y);
+						createField(view, conf, new Point(dto.Player.getMAP().x + 1, dto.Player.getMAP().y), 0, y, direction);
 					}else {
 						updateField(view, conf, x, y, x + 1, y, direction);
 					}
@@ -34,7 +34,7 @@ public class PlayerMoving {
 				case 3: //down
 					if(y - 1 < 0) {
 						//Generate new Side
-						createField(view, conf, x, conf.FIELD_SIZE - 1);
+						createField(view, conf, new Point(dto.Player.getMAP().x, dto.Player.getMAP().y - 1), x, conf.FIELD_SIZE - 1, direction);
 					}else {
 						updateField(view, conf, x, y, x, y - 1, direction);
 					}
@@ -42,7 +42,7 @@ public class PlayerMoving {
 				case 4: //left
 					if(x - 1 < 0) {
 						//Generate new Side
-						createField(view, conf, conf.FIELD_SIZE - 1, y);
+						createField(view, conf, new Point(dto.Player.getMAP().x - 1, dto.Player.getMAP().y), conf.FIELD_SIZE - 1, y, direction);
 					}else {
 						updateField(view, conf, x, y, x - 1, y, direction);
 					}
@@ -52,22 +52,49 @@ public class PlayerMoving {
 	}
 	
 	private BComponent getActualComponent(Config conf, int x, int y) {
-		BComponent Actual = conf.CurrentMapArray[x][y];
+		BComponent Actual = conf.SingleMap[x][y];
 		return Actual;
 	}
 	
-	private void updatePlayerPosition(Config conf, int x, int y) {
-		conf.CurrentMapArray[x][y].replaceWithPlayer();
+	private void updatePlayerPosition(Config conf, Point mapPoint, int x, int y) {
+		conf.SingleMap[x][y].replaceWithPlayer();
 	}
 	
-	private void createField(DefaultView view, Config conf, int x, int y) {
-		conf.CurrentMapArray = mapBuilder.BuildMap(conf);
+	private void updatePlayerPosition(Config conf, int x, int y) {
+		conf.SingleMap[x][y].replaceWithPlayer();
+	}
+	
+	private void createField(DefaultView view, Config conf, Point mapPoint, int x, int y, int direction) {
+		BComponent[][] tempMap;
+		if(conf.AllMaps.get(mapPoint) == null) {
+			conf.AllMaps.put(mapPoint, mapBuilder.BuildMap(conf));
+		}
+		tempMap = conf.AllMaps.get(mapPoint);
+		
+		switch(direction) {
+		case 1:
+			direction = 3;
+			break;
+		case 2:
+			direction = 4;
+			break;
+		case 3:
+			direction = 1;
+			break;
+		case 4:
+			direction = 2;
+			break;
+		}
+		if(getActualComponent(conf, x, y).canWalk(direction)) {
+			conf.SingleMap = tempMap;
+		}
+		
 		if(getActualComponent(conf, x, y).isExit()) {
 			view.showEnd();
 		}else {
 			dto.Player.setPOSITION(new Point(x, y));
-			updatePlayerPosition(conf, x, y);
-			view.displayNewField();
+			updatePlayerPosition(conf, mapPoint, x, y);
+			view.displayNewField(new Point(x, y));
 		}
 	}
 	
@@ -88,9 +115,9 @@ public class PlayerMoving {
 		}
 		if(getActualComponent(conf, newX, newY).canWalk(direction)) {
 			dto.Player.setPOSITION(new Point(newX, newY));
-			conf.CurrentMapArray[oldX][oldY].replaceNoPlayer();
+			conf.SingleMap[oldX][oldY].replaceNoPlayer();
 			updatePlayerPosition(conf, newX, newY);
-			view.displayNewField();
+			view.displayNewField(new Point(newX, newY));
 			if(getActualComponent(conf, newX, newY).isExit()) {
 				view.showEnd();
 			}
