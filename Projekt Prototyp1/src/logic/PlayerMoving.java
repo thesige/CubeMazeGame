@@ -91,8 +91,6 @@ public class PlayerMoving {
 			dto.Player.setPOSITION(newPlayer);
 			updatePlayerPosition(conf, newMap, newPlayer);
 			view.displayNewField(newPlayer);
-			System.out.println(conf.AllMaps);
-			System.out.println(dto.Player.getMAP());
 		}
 		
 		if(getActualComponent(conf, newMap, newPlayer).isExit()) {
