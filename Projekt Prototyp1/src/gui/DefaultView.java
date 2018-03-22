@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import dto.Config;
 import logic.BComponent;
+import logic.BComponentCrossroad;
 import logic.MapBuilder;
 import logic.PlayerMoving;
 
@@ -59,6 +60,9 @@ public class DefaultView extends JFrame implements KeyListener{
 		conf.AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(conf));
 		
 		conf.SingleMap = conf.AllMaps.get(new Point(0, 0));
+		if(conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].isExit()) {
+			conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y] = new BComponentCrossroad(1);
+		}
 		conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
 		this.add(side);
