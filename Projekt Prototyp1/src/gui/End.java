@@ -34,7 +34,7 @@ private JButton StartButton;
 		if (e.getSource() == StartButton){
 			this.dispose();
 			@SuppressWarnings("unused")
-			DefaultView v = new DefaultView();
+			Hub h = new Hub();
 		}
 		if (e.getSource() == ExitButton){
 			System.exit(0);

@@ -1,6 +1,9 @@
 package gui;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -15,16 +18,43 @@ public class DefaultView extends JFrame implements KeyListener{
 	Config conf = new dto.Config();
 	MapBuilder mapBuilder = new logic.MapBuilder();
 	
-	public DefaultView() {
+	public DefaultView(int mapSize) {
+		conf.FIELD_SIZE = mapSize;
+		
 		this.setLayout(new GridLayout(1, 1));
-		this.setSize(1700, 1700);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		int screen;
+		if(height < width) {
+			screen = (int)height;
+		}else {
+			screen = (int)width;
+		}
+		int size = 0;
+		if(conf.FIELD_SIZE * 600 < screen) {
+			size = conf.FIELD_SIZE * 600;
+		}else if(conf.FIELD_SIZE * 500 < screen) {
+			size = conf.FIELD_SIZE * 500;
+		}else if(conf.FIELD_SIZE * 400 < screen) {
+			size = conf.FIELD_SIZE * 400;
+		}else if(conf.FIELD_SIZE * 300 < screen) {
+			size = conf.FIELD_SIZE * 300;
+		}else{
+			while(conf.FIELD_SIZE * 300 >= screen) {
+				conf.FIELD_SIZE -= 1;
+				size = screen;
+			}
+		}
+		
+		this.setSize(size, size);
 		this.setTitle("RubiksMaze");
 		addKeyListener(this);
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		dto.Player.setPOSITION(new Point(1, 1));
+		dto.Player.setPOSITION(new Point(ThreadLocalRandom.current().nextInt(0, conf.FIELD_SIZE), ThreadLocalRandom.current().nextInt(0, conf.FIELD_SIZE)));
 		dto.Player.setMAP(new Point(0, 0));
 		conf.AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(conf));
 		

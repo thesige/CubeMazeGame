@@ -6,26 +6,31 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Hub extends JFrame implements ActionListener {
 
-	private JButton StartButton;
+	private JButton start[] = new JButton[6];
 	
 	public Hub() {
-		this.setLayout(new GridLayout(1, 1));
+		this.setLayout(new GridLayout(2, 3));
 		this.setSize(500, 500);
 		this.setTitle("Programm");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		StartButton = new JButton("Start");
-		this.add(StartButton);
-		StartButton.addActionListener(this);
+		for(int i = 0; i < 6; i++) {
+			start[i] = new JButton(String.valueOf(i + 2));
+			this.add(start[i]);
+			start[i].addActionListener(this);
+		}
 		
 		this.setVisible(true);
 	}
 
 	public void actionPerformed (ActionEvent e){
-		if (e.getSource() == StartButton){
-			this.dispose();
-			@SuppressWarnings("unused")
-			DefaultView v = new DefaultView();
+		for(int i = 0; i < 6; i++) {
+			if (e.getSource() == start[i]){
+				this.dispose();
+				@SuppressWarnings("unused")
+				DefaultView v = new DefaultView(i + 2);
+				break;
+			}
 		}
 	}
 }

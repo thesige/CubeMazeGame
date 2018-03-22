@@ -7,7 +7,7 @@ import logic.BComponent;
 
 public class Config {
 
-	public final int FIELD_SIZE = 3;
+	public int FIELD_SIZE;
 	
 	public HashMap<Point, BComponent[][]> AllMaps = new HashMap<Point, BComponent[][]>();
 	public BComponent[][] SingleMap = null;
