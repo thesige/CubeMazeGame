@@ -6,7 +6,9 @@ public abstract interface BComponent {
 
 	public boolean canWalk(int alignment);
 	
-	public boolean isExit();
+	public default boolean isExit() {
+		return false;
+	};
 	public String getImage();
 	public void replaceWithPlayer();
 	public void replaceNoPlayer();
