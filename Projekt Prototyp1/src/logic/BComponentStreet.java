@@ -26,10 +26,6 @@ public class BComponentStreet implements BComponent{
 		return  false;
 	}
 	
-	public boolean isExit() {
-    	return false;
-    }
-	
 	public String getImage() {
 		return this.img;
 	}
