@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.HashMap;
 
 import logic.BComponent;
-import logic.Maps;
 
 public class Config {
 

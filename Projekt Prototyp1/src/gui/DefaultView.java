@@ -28,8 +28,8 @@ public class DefaultView extends JFrame implements KeyListener{
 		dto.Player.setMAP(new Point(0, 0));
 		conf.AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(conf));
 		
-		conf.AllMaps.get(new Point(0, 0))[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		conf.SingleMap = conf.AllMaps.get(new Point(0, 0));
+		conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
 		this.add(side);
 		displayNewField(dto.Player.getMAP());
