@@ -48,7 +48,7 @@ public class DefaultView extends JFrame implements KeyListener{
 		}
 		
 		this.setSize(size, size);
-		this.setTitle("RubiksMaze");
+		this.setTitle("Escape the Maze!");
 		addKeyListener(this);
 		this.setVisible(true);
 		this.setResizable(false);

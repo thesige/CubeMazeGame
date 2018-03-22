@@ -17,7 +17,7 @@ private JButton StartButton;
 	public End() {
 		this.setLayout(new GridLayout(2, 1));
 		this.setSize(500, 500);
-		this.setTitle("Programm");
+		this.setTitle("Escaped");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		StartButton = new JButton("Start new Maze");

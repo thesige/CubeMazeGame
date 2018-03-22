@@ -25,7 +25,7 @@ public class Hub extends JFrame implements ActionListener {
 		
 		this.setLayout(new GridLayout(2, 3));
 		this.setSize(width / 2, height / 2);
-		this.setTitle("Maze");
+		this.setTitle("Configure the Maze");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		for(int i = 0; i < maxFieldSize; i++) {
