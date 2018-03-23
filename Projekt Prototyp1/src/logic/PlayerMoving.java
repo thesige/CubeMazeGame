@@ -5,10 +5,20 @@ import java.awt.Point;
 import dto.Config;
 import gui.DefaultView;
 
-
+/**
+ * Validates the movements of the player
+ * @author jermann
+ *
+ */
 public class PlayerMoving {
 	MapBuilder mapBuilder = new logic.MapBuilder();
 	
+	/**
+	 * Checks if the player can move in the given direction and shows the new map
+	 * @param view, instance of the game
+	 * @param conf, configuration
+	 * @param direction, the wanted direction
+	 */
 	public void validateMove(DefaultView view, Config conf, int direction) {
 		Point player = dto.Player.getPOSITION();
 		Point map = dto.Player.getMAP();
@@ -51,19 +61,47 @@ public class PlayerMoving {
 		}
 	}
 	
+	/**
+	 * Gets the component
+	 * @param conf, configuration
+	 * @param map, the Map
+	 * @param player, the Position
+	 * @return, Component
+	 */
 	private BComponent getActualComponent(Config conf, Point map, Point player) {
 		BComponent Actual = conf.AllMaps.get(map)[player.x][player.y];
 		return Actual;
 	}
 	
+	/**
+	 * Changes the picture to an identical one with the player on it
+	 * @param conf, the configuration
+	 * @param mapPoint, the Map
+	 * @param player, the Position on the Map
+	 */
 	private void updatePlayerPosition(Config conf, Point mapPoint, Point player) {
 		conf.SingleMap[player.x][player.y].replaceWithPlayer();
 	}
 	
+	/**
+	 * Changes the image back to the one without the player
+	 * @param conf, the configuration
+	 * @param player, the Position on the Map
+	 */
 	private void updatePlayerPosition(Config conf, Point player) {
 		conf.SingleMap[player.x][player.y].replaceWithPlayer();
 	}
 	
+	/**
+	 * gets/creates the new field, checks if moving is possible and renders
+	 * @param view, instance of the Game
+	 * @param conf, configuration
+	 * @param oldMap, current Map
+	 * @param newMap, map after change
+	 * @param oldPlayer, current player position
+	 * @param newPlayer, player position after change
+	 * @param direction, the given direction
+	 */
 	private void createField(DefaultView view, Config conf, Point oldMap, Point newMap, Point oldPlayer, Point newPlayer, int direction) {
 		BComponent[][] tempMap;
 		if(!conf.AllMaps.containsKey(newMap)) {
@@ -98,6 +136,14 @@ public class PlayerMoving {
 		}
 	}
 	
+	/**
+	 * Checks if the player can move and updates the field
+	 * @param view, instance of the Game
+	 * @param conf, configuration
+	 * @param oldPlayer, current player position
+	 * @param newPlayer, player position after change
+	 * @param direction, the given direction
+	 */
 	private void updateField(DefaultView view, Config conf, Point oldPlayer, Point newPlayer, int direction) {
 		switch(direction) {
 		case 1:

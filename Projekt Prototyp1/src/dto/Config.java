@@ -5,6 +5,11 @@ import java.util.HashMap;
 
 import logic.BComponent;
 
+/**
+ * The storage, important variables get stored here
+ * @author jermann
+ *
+ */
 public class Config {
 
 	public int FIELD_SIZE;

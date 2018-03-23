@@ -13,12 +13,21 @@ import logic.BComponentCrossroad;
 import logic.MapBuilder;
 import logic.PlayerMoving;
 
+/**
+ * The gui of the maze
+ * @author jermann
+ *
+ */
 @SuppressWarnings("serial")
 public class DefaultView extends JFrame implements KeyListener{
 	JPanel side;
 	Config conf = new dto.Config();
 	MapBuilder mapBuilder = new logic.MapBuilder();
 	
+	/**
+	 * Creates the first map, places the player and displays the whole thing
+	 * @param mapSize, length (number of components) of a side
+	 */
 	public DefaultView(int mapSize) {
 		conf.FIELD_SIZE = mapSize;
 		
@@ -69,26 +78,42 @@ public class DefaultView extends JFrame implements KeyListener{
 		displayNewField(dto.Player.getMAP());
 	}
 	
+	/**
+	 * renders the map
+	 * @param mapPoint, the given map
+	 */
 	public void displayNewField(Point mapPoint) {
 		side.removeAll();
 		for(int x = 0; x < conf.FIELD_SIZE; x++) {
 			for(int y = 0; y < conf.FIELD_SIZE; y++) {
-				side.add(getImageAsLabel(mapPoint, x, y));
+				side.add(getImageAsLabel(mapPoint, new Point(x, y)));
 			}
 		}
 		this.setVisible(true);
 	}
 	
-	private JLabel getImageAsLabel(Point mapPoint, int x, int y) {
-		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, mapPoint, x, y))));
+	/**
+	 * Gets the image of the component as JLabel
+	 * @param mapPoint, given map
+	 * @param bcomponent, given position on map
+	 * @return JLabel with the image
+	 */
+	private JLabel getImageAsLabel(Point mapPoint, Point bcomponent) {
+		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, mapPoint, bcomponent))));
 	}
 	
+	/**
+	 * Displays the endscreen
+	 */
 	public void showEnd() {
 		this.dispose();
 		@SuppressWarnings("unused")
 		End end = new End();
 	}
 	
+	/**
+	 * Checks which button got pressed and goes into the validateMove function
+	 */
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		PlayerMoving playerMoving = new logic.PlayerMoving();

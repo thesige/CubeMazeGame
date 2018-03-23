@@ -6,10 +6,18 @@ import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
+/**
+ * The startscreen
+ *  * @author jermann
+ *
+ */
 public class Hub extends JFrame implements ActionListener {
 	private JButton start[];
 	private int maxFieldSize;
 	
+	/**
+	 * creates the startscreen and checks for the maximum fieldsize (2 - (display size / 300))
+	 */
 	public Hub() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
@@ -36,6 +44,9 @@ public class Hub extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Checks which button got pressed and starts the game
+	 */
 	public void actionPerformed (ActionEvent e){
 		for(int i = 0; i < maxFieldSize; i++) {
 			if (e.getSource() == start[i]){

@@ -4,8 +4,18 @@ import java.awt.Point;
 
 import dto.Config;
 
+/**
+ * Builds the new maps
+ * @author jermann
+ *
+ */
 public class MapBuilder {
 	
+	/**
+	 * Creates the map
+	 * @param conf, configuration
+	 * @return, created map
+	 */
 	public BComponent[][] BuildMap(Config conf){
 		BComponent b[][] = new BComponent[conf.FIELD_SIZE][conf.FIELD_SIZE];
 		for(int j = 0; j < conf.FIELD_SIZE; j++) {
@@ -35,7 +45,14 @@ public class MapBuilder {
 		return b;
 	}
 	
-	public String getImageAsLabel(Config conf, Point map, int x, int y) {
-		return conf.SingleMap[x][y].getImage();
+	/**
+	 * Gets the image string of the component
+	 * @param conf, configuration
+	 * @param map, given map
+	 * @param bcomp, field on map
+	 * @return, string with path to the image
+	 */
+	public String getImageAsLabel(Config conf, Point map, Point bcomp) {
+		return conf.SingleMap[bcomp.x][bcomp.y].getImage();
 	}
 }
