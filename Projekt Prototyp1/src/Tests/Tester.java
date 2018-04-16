@@ -37,7 +37,7 @@ public class Tester {
 	}
 	
 	@Test
-	public void Stay() throws InterruptedException {
+	public void DontGoDown() throws InterruptedException {
 		v.createMapForTest1(2);
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
@@ -45,6 +45,20 @@ public class Tester {
 		v.testhelp(2);
 		Thread.sleep(800);
 		assertTrue(v.getPlayerLocation().y == 1 && v.getPlayerLocation().x == 1);
+	}
+	
+	@Test
+	public void ChangeMap() throws InterruptedException {
+		v.createMapForTest3(1);
+		v.setPlayerLocation(new Point(1, 2));
+		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
+		v.displayNewField(new Point(0, 0));
+		Thread.sleep(1000);
+		v.testhelp(1);
+		Thread.sleep(800);
+		System.out.println(v.getPlayerMap());
+		System.out.println(v.getPlayerLocation());
+		assertTrue(v.getPlayerLocation().x == 1 && v.getPlayerLocation().y == 0 && v.getPlayerMap().x == 0 && v.getPlayerMap().y == 1);
 	}
 	
 	@After

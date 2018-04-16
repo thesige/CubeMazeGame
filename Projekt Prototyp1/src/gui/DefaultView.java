@@ -8,6 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import dto.Config;
+import logic.BComponent;
 import logic.BComponentCrossroad;
 import logic.MapBuilder;
 import logic.PlayerMoving;
@@ -160,12 +161,27 @@ public class DefaultView extends JFrame implements KeyListener{
 		getConf().SingleMap[2][1] = new logic.BComponentStreet(alignment - 1);
 	}
 	
+	public void createMapForTest3(int alignment) {
+		getConf().SingleMap[1][2] = new logic.BComponentStreet(alignment);
+		BComponent temp[][] = new BComponent[3][3];
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				temp[i][j] = new logic.BComponentStreet(alignment);
+			}
+		}
+		getConf().AllMaps.put(new Point(0, 1), temp);
+	}
+	
 	public void setPlayerLocation(Point p) {
 		dto.Player.setPOSITION(p);
 	}
 	
 	public Point getPlayerLocation(){
 		return dto.Player.getPOSITION();
+	}
+	
+	public Point getPlayerMap(){
+		return dto.Player.getMAP();
 	}
 
 	public Config getConf() {
