@@ -1,10 +1,19 @@
 package dto;
 
+import java.awt.Point;
+import java.util.HashMap;
+
 import logic.BComponent;
 
+/**
+ * The storage, important variables get stored here
+ * @author jermann
+ *
+ */
 public class Config {
 
-	public final int FIELD_SIZE = 3;
+	public int FIELD_SIZE;
 	
-	public BComponent[][] CurrentMapArray = null;
+	public HashMap<Point, BComponent[][]> AllMaps = new HashMap<Point, BComponent[][]>();
+	public BComponent[][] SingleMap = null;
 }

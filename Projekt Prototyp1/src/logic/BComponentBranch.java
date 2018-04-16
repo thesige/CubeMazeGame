@@ -39,10 +39,6 @@ public class BComponentBranch implements BComponent{
         }
         return false;
     }
-    
-    public boolean isExit() {
-    	return false;
-    }
 
 	@Override
 	public String getImage() {

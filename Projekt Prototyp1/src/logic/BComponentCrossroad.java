@@ -15,10 +15,6 @@ public class BComponentCrossroad implements BComponent{
         return true;
     }
     
-    public boolean isExit() {
-    	return false;
-    }
-    
     public String getImage() {
 		return this.img;
 	}
