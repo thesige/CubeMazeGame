@@ -26,25 +26,25 @@ public class Tester {
 	}
 	
 	@Test
-	public void test() throws InterruptedException {
-		v.createMapForTest1(1);
+	public void GoUp() throws InterruptedException {
+		v.createMapForTest2(2);
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
 		Thread.sleep(1000);
-		v.testhelp(1);
+		v.testhelp(4);
 		Thread.sleep(800);
-		assertTrue(v.getPlayerLocation().y == 2 && v.getPlayerLocation().x == 1);
+		assertTrue(v.getPlayerLocation().y == 1 && v.getPlayerLocation().x == 0);
 	}
 	
 	@Test
-	public void test2() throws InterruptedException {
-		v.createMapForTest2(1);
+	public void Stay() throws InterruptedException {
+		v.createMapForTest1(2);
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
 		Thread.sleep(1000);
-		v.testhelp(3);
+		v.testhelp(2);
 		Thread.sleep(800);
-		assertTrue(v.getPlayerLocation().y == 0 && v.getPlayerLocation().x == 1);
+		assertTrue(v.getPlayerLocation().y == 1 && v.getPlayerLocation().x == 1);
 	}
 	
 	@After

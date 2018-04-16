@@ -150,14 +150,14 @@ public class DefaultView extends JFrame implements KeyListener{
 		playerMoving.validateMove(this, getConf(), direction);
 	}
 	
-	public void createMapForTest1(int alignment) {
+	public void createMapForTest2(int alignment) {
+		getConf().SingleMap[0][1] = new logic.BComponentStreet(alignment);
 		getConf().SingleMap[1][1] = new logic.BComponentStreet(alignment);
-		getConf().SingleMap[1][2] = new logic.BComponentStreet(alignment);
 	}
 	
-	public void createMapForTest2(int alignment) {
+	public void createMapForTest1(int alignment) {
 		getConf().SingleMap[1][1] = new logic.BComponentStreet(alignment);
-		getConf().SingleMap[1][0] = new logic.BComponentStreet(alignment);
+		getConf().SingleMap[2][1] = new logic.BComponentStreet(alignment - 1);
 	}
 	
 	public void setPlayerLocation(Point p) {
