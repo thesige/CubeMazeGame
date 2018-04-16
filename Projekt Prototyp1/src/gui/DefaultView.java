@@ -8,7 +8,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import dto.Config;
-import logic.BComponent;
 import logic.BComponentCrossroad;
 import logic.MapBuilder;
 import logic.PlayerMoving;

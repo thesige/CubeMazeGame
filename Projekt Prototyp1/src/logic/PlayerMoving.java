@@ -103,7 +103,6 @@ public class PlayerMoving {
 	 * @param direction, the given direction
 	 */
 	private void createField(DefaultView view, Config conf, Point oldMap, Point newMap, Point oldPlayer, Point newPlayer, int direction) {
-		BComponent[][] tempMap;
 		if(!conf.AllMaps.containsKey(newMap)) {
 			conf.AllMaps.put(newMap, mapBuilder.BuildMap(conf));
 		}
