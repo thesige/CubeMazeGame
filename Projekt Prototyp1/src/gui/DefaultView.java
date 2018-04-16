@@ -93,11 +93,14 @@ public class DefaultView extends JFrame implements KeyListener{
 	}
 	
 	public void testmap2(int alignment) {
+		System.out.println(conf.CurrentMapArray[1][1]);
 		conf.CurrentMapArray[1][1] = new logic.BComponentStreet(alignment);
 		conf.CurrentMapArray[1][0] = new logic.BComponentStreet(alignment);
+		displayNewField();
+		System.out.println(conf.CurrentMapArray[1][1]);
 	}
 	
-	public int getPlayerLocationY(){
-		return dto.Player.getPOSITION().y;
+	public Point getPlayerLocation(){
+		return dto.Player.getPOSITION();
 	}
 }

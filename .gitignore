@@ -1,3 +1,5 @@
 .idea
 .recommenders
 /.metadata/
+*.ucls
+*.png
