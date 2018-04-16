@@ -20,7 +20,7 @@ import logic.PlayerMoving;
 @SuppressWarnings("serial")
 public class DefaultView extends JFrame implements KeyListener{
 	JPanel side;
-	Config conf = new dto.Config();
+	private Config conf = new dto.Config();
 	MapBuilder mapBuilder = new logic.MapBuilder();
 	
 	/**
@@ -28,7 +28,7 @@ public class DefaultView extends JFrame implements KeyListener{
 	 * @param mapSize, length (number of components) of a side
 	 */
 	public DefaultView(int mapSize) {
-		conf.FIELD_SIZE = mapSize;
+		getConf().FIELD_SIZE = mapSize;
 		
 		this.setLayout(new GridLayout(1, 1));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -41,17 +41,17 @@ public class DefaultView extends JFrame implements KeyListener{
 			screen = (int)width;
 		}
 		int size = 0;
-		if(conf.FIELD_SIZE * 600 < screen) {
-			size = conf.FIELD_SIZE * 600;
-		}else if(conf.FIELD_SIZE * 500 < screen) {
-			size = conf.FIELD_SIZE * 500;
-		}else if(conf.FIELD_SIZE * 400 < screen) {
-			size = conf.FIELD_SIZE * 400;
-		}else if(conf.FIELD_SIZE * 300 < screen) {
-			size = conf.FIELD_SIZE * 300;
+		if(getConf().FIELD_SIZE * 600 < screen) {
+			size = getConf().FIELD_SIZE * 600;
+		}else if(getConf().FIELD_SIZE * 500 < screen) {
+			size = getConf().FIELD_SIZE * 500;
+		}else if(getConf().FIELD_SIZE * 400 < screen) {
+			size = getConf().FIELD_SIZE * 400;
+		}else if(getConf().FIELD_SIZE * 300 < screen) {
+			size = getConf().FIELD_SIZE * 300;
 		}else{
-			while(conf.FIELD_SIZE * 300 >= screen) {
-				conf.FIELD_SIZE -= 1;
+			while(getConf().FIELD_SIZE * 300 >= screen) {
+				getConf().FIELD_SIZE -= 1;
 				size = screen;
 			}
 		}
@@ -63,16 +63,16 @@ public class DefaultView extends JFrame implements KeyListener{
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		dto.Player.setPOSITION(new Point(ThreadLocalRandom.current().nextInt(0, conf.FIELD_SIZE), ThreadLocalRandom.current().nextInt(0, conf.FIELD_SIZE)));
+		dto.Player.setPOSITION(new Point(ThreadLocalRandom.current().nextInt(0, getConf().FIELD_SIZE), ThreadLocalRandom.current().nextInt(0, getConf().FIELD_SIZE)));
 		dto.Player.setMAP(new Point(0, 0));
-		conf.AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(conf));
+		getConf().AllMaps.put(new Point(0, 0), mapBuilder.BuildMap(getConf()));
 		
-		conf.SingleMap = conf.AllMaps.get(new Point(0, 0));
-		if(conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].isExit()) {
-			conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y] = new BComponentCrossroad(1);
+		getConf().SingleMap = getConf().AllMaps.get(new Point(0, 0));
+		if(getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].isExit()) {
+			getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y] = new BComponentCrossroad(1);
 		}
-		conf.SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
-		side = new JPanel(new GridLayout(conf.FIELD_SIZE, conf.FIELD_SIZE));
+		getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
+		side = new JPanel(new GridLayout(getConf().FIELD_SIZE, getConf().FIELD_SIZE));
 		this.add(side);
 		displayNewField(dto.Player.getMAP());
 	}
@@ -83,8 +83,8 @@ public class DefaultView extends JFrame implements KeyListener{
 	 */
 	public void displayNewField(Point mapPoint) {
 		side.removeAll();
-		for(int x = 0; x < conf.FIELD_SIZE; x++) {
-			for(int y = 0; y < conf.FIELD_SIZE; y++) {
+		for(int x = 0; x < getConf().FIELD_SIZE; x++) {
+			for(int y = 0; y < getConf().FIELD_SIZE; y++) {
 				side.add(getImageAsLabel(mapPoint, new Point(x, y)));
 			}
 		}
@@ -98,7 +98,7 @@ public class DefaultView extends JFrame implements KeyListener{
 	 * @return JLabel with the image
 	 */
 	private JLabel getImageAsLabel(Point mapPoint, Point bcomponent) {
-		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(conf, mapPoint, bcomponent))));
+		return new JLabel(new ImageIcon(getClass().getResource(mapBuilder.getImageAsLabel(getConf(), mapPoint, bcomponent))));
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class DefaultView extends JFrame implements KeyListener{
 				direction = 2;
 				break;
 		}
-		playerMoving.validateMove(this, conf, direction);
+		playerMoving.validateMove(this, getConf(), direction);
 	}
 
 	@Override
@@ -142,5 +142,37 @@ public class DefaultView extends JFrame implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		
+	}
+	
+	//JUNIT HELPERS
+	public void testhelp(int direction) {
+		PlayerMoving playerMoving = new logic.PlayerMoving();
+		playerMoving.validateMove(this, getConf(), direction);
+	}
+	
+	public void createMapForTest1(int alignment) {
+		getConf().SingleMap[1][1] = new logic.BComponentStreet(alignment);
+		getConf().SingleMap[1][2] = new logic.BComponentStreet(alignment);
+	}
+	
+	public void createMapForTest2(int alignment) {
+		getConf().SingleMap[1][1] = new logic.BComponentStreet(alignment);
+		getConf().SingleMap[1][0] = new logic.BComponentStreet(alignment);
+	}
+	
+	public void setPlayerLocation(Point p) {
+		dto.Player.setPOSITION(p);
+	}
+	
+	public Point getPlayerLocation(){
+		return dto.Player.getPOSITION();
+	}
+
+	public Config getConf() {
+		return conf;
+	}
+
+	public void setConf(Config conf) {
+		this.conf = conf;
 	}
 }
