@@ -81,4 +81,23 @@ public class DefaultView extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent arg0) {
 		
 	}
+	
+	public void testhelp(int direction) {
+		PlayerMoving playerMoving = new logic.PlayerMoving();
+		playerMoving.validateMove(this, conf, direction);
+	}
+	
+	public void testmap1(int alignment) {
+		conf.CurrentMapArray[1][1] = new logic.BComponentStreet(alignment);
+		conf.CurrentMapArray[1][2] = new logic.BComponentStreet(alignment);
+	}
+	
+	public void testmap2(int alignment) {
+		conf.CurrentMapArray[1][1] = new logic.BComponentStreet(alignment);
+		conf.CurrentMapArray[1][0] = new logic.BComponentStreet(alignment);
+	}
+	
+	public int getPlayerLocationY(){
+		return dto.Player.getPOSITION().y;
+	}
 }
