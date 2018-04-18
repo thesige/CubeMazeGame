@@ -1,10 +1,14 @@
 package gui;
 
 import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -16,6 +20,9 @@ import javax.swing.WindowConstants;
  */
 public class End extends JFrame implements ActionListener {
 
+private JPanel panel1;
+private JPanel panel2;
+private JLabel label1;
 private JButton ExitButton;
 private JButton StartButton;
 	
@@ -27,11 +34,26 @@ private JButton StartButton;
 		this.setSize(500, 500);
 		this.setTitle("Escaped");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		panel1 =new JPanel();
+		panel1.setSize(250, 250);
+		panel1.setBackground(Color.white);
+		panel2 =new JPanel();
+		panel2.setSize(250, 250);
+		panel2.setBackground(Color.white);
+		label1=new JLabel("You escaped the Maze!!!");
+		label1.setFont(new Font("sans serif", Font.ITALIC,26));
 		
 		StartButton = new JButton("Start new Maze");
+		StartButton.setBackground(Color.GRAY);
+		StartButton.setSize(50, 50);
 		ExitButton = new JButton("Exit");
-		this.add(StartButton);
-		this.add(ExitButton);
+		ExitButton.setBackground(Color.GRAY);
+		this.add(panel1); 
+		this.add(panel2);
+		panel1.add(label1);
+		panel2.add(StartButton);
+		panel2.add(ExitButton);
 		StartButton.addActionListener(this);
 		ExitButton.addActionListener(this);
 		
