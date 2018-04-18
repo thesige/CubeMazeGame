@@ -1,9 +1,7 @@
 package gui;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -28,19 +26,10 @@ public class DefaultView extends JFrame implements KeyListener{
 	 * Creates the first map, places the player and displays the whole thing
 	 * @param mapSize, length (number of components) of a side
 	 */
-	public DefaultView(int mapSize) {
+	public DefaultView(int mapSize, int screen) {
 		getConf().FIELD_SIZE = mapSize;
 		
 		this.setLayout(new GridLayout(1, 1));
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
-		int screen;
-		if(height < width) {
-			screen = (int)height;
-		}else {
-			screen = (int)width;
-		}
 		int size = 0;
 		if(getConf().FIELD_SIZE * 600 < screen) {
 			size = getConf().FIELD_SIZE * 600;

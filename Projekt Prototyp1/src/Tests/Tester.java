@@ -16,7 +16,7 @@ public class Tester {
 	
 	@BeforeEach
 	public void before() {
-		v = new gui.DefaultView(3);
+		v = new gui.DefaultView(3, 1200);
 		v.setPlayerLocation(new Point(1, 1));
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {

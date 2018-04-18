@@ -15,6 +15,7 @@ import javax.swing.*;
 public class Hub extends JFrame implements ActionListener {
 	private JButton start[];
 	private int maxFieldSize;
+	private int screenSize;
 	
 	/**
 	 * creates the startscreen and checks for the maximum fieldsize (2 - (display size / 300))
@@ -23,13 +24,12 @@ public class Hub extends JFrame implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
 		int height = (int) screenSize.getHeight();
-		int screen;
 		if(height < width) {
-			screen = (int)height;
+			this.screenSize = (int)height;
 		}else {
-			screen = (int)width;
+			this.screenSize = (int)width;
 		}
-		maxFieldSize = (screen / 300) - 2;
+		maxFieldSize = (this.screenSize / 300) - 2;
 		start = new JButton[maxFieldSize];
 		
 		this.setLayout(new GridLayout(2, 3));
@@ -54,7 +54,7 @@ public class Hub extends JFrame implements ActionListener {
 			if (e.getSource() == start[i]){
 				this.dispose();
 				@SuppressWarnings("unused")
-				DefaultView v = new DefaultView(i + 2);
+				DefaultView v = new DefaultView(i + 2, this.screenSize);
 				break;
 			}
 		}
