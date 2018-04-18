@@ -74,16 +74,6 @@ public class PlayerMoving {
 	}
 	
 	/**
-	 * Changes the picture to an identical one with the player on it
-	 * @param conf, the configuration
-	 * @param mapPoint, the Map
-	 * @param player, the Position on the Map
-	 */
-	private void updatePlayerPosition(Config conf, Point mapPoint, Point player) {
-		conf.SingleMap[player.x][player.y].replaceWithPlayer();
-	}
-	
-	/**
 	 * Changes the image back to the one without the player
 	 * @param conf, the configuration
 	 * @param player, the Position on the Map
@@ -126,7 +116,7 @@ public class PlayerMoving {
 			conf.SingleMap = conf.AllMaps.get(newMap);
 			dto.Player.setMAP(newMap);
 			dto.Player.setPOSITION(newPlayer);
-			updatePlayerPosition(conf, newMap, newPlayer);
+			updatePlayerPosition(conf, newPlayer);
 			view.displayNewField(newPlayer);
 		}
 		

@@ -1,6 +1,5 @@
 package gui;
 import java.awt.Dimension;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;

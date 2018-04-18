@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Point;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +30,7 @@ public class Tester {
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
 		Thread.sleep(1000);
-		v.testhelp(4);
+		v.testMoveHelp(4);
 		Thread.sleep(800);
 		assertTrue(v.getPlayerLocation().y == 1 && v.getPlayerLocation().x == 0);
 	}
@@ -42,7 +41,7 @@ public class Tester {
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
 		Thread.sleep(1000);
-		v.testhelp(2);
+		v.testMoveHelp(2);
 		Thread.sleep(800);
 		assertTrue(v.getPlayerLocation().y == 1 && v.getPlayerLocation().x == 1);
 	}
@@ -54,10 +53,8 @@ public class Tester {
 		v.getConf().SingleMap[dto.Player.getPOSITION().x][dto.Player.getPOSITION().y].replaceWithPlayer();
 		v.displayNewField(new Point(0, 0));
 		Thread.sleep(1000);
-		v.testhelp(1);
+		v.testMoveHelp(1);
 		Thread.sleep(800);
-		System.out.println(v.getPlayerMap());
-		System.out.println(v.getPlayerLocation());
 		assertTrue(v.getPlayerLocation().x == 1 && v.getPlayerLocation().y == 0 && v.getPlayerMap().x == 0 && v.getPlayerMap().y == 1);
 	}
 	

@@ -135,7 +135,7 @@ public class DefaultView extends JFrame implements KeyListener{
 	}
 	
 	//JUNIT HELPERS
-	public void testhelp(int direction) {
+	public void testMoveHelp(int direction) {
 		PlayerMoving playerMoving = new logic.PlayerMoving();
 		playerMoving.validateMove(this, getConf(), direction);
 	}

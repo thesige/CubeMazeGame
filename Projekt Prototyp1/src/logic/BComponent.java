@@ -36,7 +36,7 @@ public abstract interface BComponent {
 	public void replaceWithPlayer();
 	
 	/**
-	 * Replaces the image with the one withou the player
+	 * Replaces the image with the one without the player
 	 */
 	public void replaceNoPlayer();
 }
