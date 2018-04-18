@@ -14,7 +14,6 @@ import javax.swing.*;
  */
 public class Hub extends JFrame implements ActionListener {
 	private JButton start[];
-	private JPanel panel1;
 	private int maxFieldSize;
 	
 	/**
@@ -37,14 +36,11 @@ public class Hub extends JFrame implements ActionListener {
 		this.setSize(width / 2, height / 2);
 		this.setTitle("Choose Map Size");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.add(panel1);
 		
-		panel1.setBackground(Color.white);
 		
 		for(int i = 0; i < maxFieldSize; i++) {
 			start[i] = new JButton(String.valueOf(i + 2) + "x" + String.valueOf(i + 2));
-			panel1.add(start[i]);
-			start[i].setBackground(Color.GRAY);
+			this.add(start[i]);
 			start[i].addActionListener(this);
 		}
 		this.setVisible(true);
