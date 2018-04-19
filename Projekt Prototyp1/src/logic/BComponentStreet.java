@@ -1,23 +1,20 @@
 package logic;
 
 //Street
-public class BComponentStreet implements BComponent{
-	private int alignment;
-	private String img;
+public class BComponentStreet extends BComponentParent{
 	
 	public BComponentStreet(int alignment) {
-		super();
-		this.alignment = alignment;
+		super(alignment);
 		replaceNoPlayer();
 	}
 	
 	public boolean canWalk(int direction){
-		if (this.alignment == 1){
+		if (alignment == 1){
 			switch (direction){
 			case 1:
 			case 3: return true;
 			}
-		} else if (this.alignment == 2){
+		} else if (alignment == 2){
 			switch (direction){
 			case 2:
 			case 4: return true;
@@ -27,29 +24,29 @@ public class BComponentStreet implements BComponent{
 	}
 	
 	public String getImage() {
-		return this.img;
+		return img;
 	}
 
 	@Override
 	public void replaceWithPlayer() {
-		switch(this.alignment) {
+		switch(alignment) {
 		case 1:
-			this.img = "/dto/Street1player.png";
+			img = "/dto/Street1player.png";
 			break;
 		case 2:
-			this.img = "/dto/Street2player.png";
+			img = "/dto/Street2player.png";
 			break;
 		}
 	}
 
 	@Override
 	public void replaceNoPlayer() {
-		switch(this.alignment) {
+		switch(alignment) {
 		case 1:
-			this.img = "/dto/Street1.png";
+			img = "/dto/Street1.png";
 			break;
 		case 2:
-			this.img = "/dto/Street2.png";
+			img = "/dto/Street2.png";
 			break;
 		}
 	}

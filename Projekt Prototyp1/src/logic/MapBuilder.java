@@ -16,8 +16,8 @@ public class MapBuilder {
 	 * @param conf, configuration
 	 * @return, created map
 	 */
-	public BComponent[][] BuildMap(Config conf){
-		BComponent b[][] = new BComponent[conf.FIELD_SIZE][conf.FIELD_SIZE];
+	public BComponentInterface[][] BuildMap(Config conf){
+		BComponentInterface b[][] = new BComponentInterface[conf.FIELD_SIZE][conf.FIELD_SIZE];
 		for(int j = 0; j < conf.FIELD_SIZE; j++) {
 			for(int i = 0; i < conf.FIELD_SIZE; i++) {
 				int RandomExit = (int)(Math.random() * (6 * (conf.FIELD_SIZE * conf.FIELD_SIZE)));

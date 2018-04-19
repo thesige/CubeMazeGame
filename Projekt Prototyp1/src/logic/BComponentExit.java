@@ -1,13 +1,10 @@
 package logic;
 
-public class BComponentExit implements BComponent{
-	@SuppressWarnings("unused")
-	private int alignment;
-	private String img;
+public class BComponentExit extends BComponentParent{
 	
 	public BComponentExit(int alignment) {
-		super();
-		this.img = "/dto/Player.png";
+		super(alignment);
+		img = "/dto/Player.png";
 	}
 	
     public boolean canWalk(int direction){
@@ -19,7 +16,7 @@ public class BComponentExit implements BComponent{
     }
     
     public String getImage() {
-		return this.img;
+		return img;
 	}
 
 	@Override

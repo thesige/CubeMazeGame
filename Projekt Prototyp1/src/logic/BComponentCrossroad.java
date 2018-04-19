@@ -1,13 +1,10 @@
 package logic;
 
 //Crossroad
-public class BComponentCrossroad implements BComponent{
-	@SuppressWarnings("unused")
-	private int alignment;
-	private String img;
+public class BComponentCrossroad extends BComponentParent{
 	
 	public BComponentCrossroad(int alignment) {
-		super();
+		super(alignment);
 		replaceNoPlayer();
 	}
 	
@@ -16,16 +13,16 @@ public class BComponentCrossroad implements BComponent{
     }
     
     public String getImage() {
-		return this.img;
+		return img;
 	}
 
 	@Override
 	public void replaceWithPlayer() {
-		this.img = "/dto/Crossroadplayer.png";
+		img = "/dto/Crossroadplayer.png";
 	}
 
 	@Override
 	public void replaceNoPlayer() {
-		this.img = "/dto/Crossroad.png";
+		img = "/dto/Crossroad.png";
 	}
 }

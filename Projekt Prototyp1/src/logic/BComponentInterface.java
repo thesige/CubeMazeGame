@@ -5,7 +5,7 @@ package logic;
  * @author jermann
  *
  */
-public abstract interface BComponent {
+public abstract interface BComponentInterface {
 	Integer alignment = 1;
 	String img = null;
 
@@ -20,9 +20,7 @@ public abstract interface BComponent {
 	 * Checks if the component is the exit
 	 * @return false, true on BComponentExit
 	 */
-	public default boolean isExit() {
-		return false;
-	};
+	public boolean isExit();
 	
 	/**
 	 * gets the image as string

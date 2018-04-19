@@ -68,8 +68,8 @@ public class PlayerMoving {
 	 * @param player, the Position
 	 * @return, Component
 	 */
-	private BComponent getActualComponent(Config conf, Point map, Point player) {
-		BComponent Actual = conf.AllMaps.get(map)[player.x][player.y];
+	private BComponentInterface getActualComponent(Config conf, Point map, Point player) {
+		BComponentInterface Actual = conf.AllMaps.get(map)[player.x][player.y];
 		return Actual;
 	}
 	
