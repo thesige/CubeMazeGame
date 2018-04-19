@@ -41,19 +41,15 @@ private JButton StartButton;
 		this.setTitle("Escaped");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		panel1 =new JPanel();
-		panel1.setSize(width / 4, width / 4);
+		panel1 = new JPanel();
 		panel1.setBackground(Color.white);
-		panel2 =new JPanel();
+		panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(2, 1));
-		panel2.setSize(width / 4, width / 4);
 		panel2.setBackground(Color.white);
-		label1=new JLabel("You escaped the Maze!!!");
-		label1.setFont(new Font("sans serif", Font.ITALIC,26));
+		label1= new JLabel("You escaped the Maze!!!");
 		
 		StartButton = new JButton("Start new Maze");
 		StartButton.setBackground(Color.GRAY);
-		StartButton.setSize(width / 6, width / 6);
 		ExitButton = new JButton("Exit");
 		ExitButton.setBackground(Color.GRAY);
 		this.add(panel1); 
