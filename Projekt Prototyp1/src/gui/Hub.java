@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 
 @SuppressWarnings("serial")
 /**
