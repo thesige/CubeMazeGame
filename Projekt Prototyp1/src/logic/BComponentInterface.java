@@ -6,9 +6,6 @@ package logic;
  *
  */
 public abstract interface BComponentInterface {
-	Integer alignment = 1;
-	String img = null;
-
 	/**
 	 * Checks if the player can walk
 	 * @param alignment, the direction
