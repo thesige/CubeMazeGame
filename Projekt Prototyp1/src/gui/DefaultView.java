@@ -27,6 +27,7 @@ public class DefaultView extends JFrame implements KeyListener{
 	 * @param mapSize, length (number of components) of a side
 	 */
 	public DefaultView(int mapSize, int screen) {
+		
 		getConf().FIELD_SIZE = mapSize;
 		
 		this.setLayout(new GridLayout(1, 1));

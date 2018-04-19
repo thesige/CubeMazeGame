@@ -1,9 +1,11 @@
 package gui;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 @SuppressWarnings("serial")
 /**
@@ -20,6 +22,9 @@ public class Hub extends JFrame implements ActionListener {
 	 * creates the startscreen and checks for the maximum fieldsize (2 - (display size / 300))
 	 */
 	public Hub() {
+		UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 80));
+	    UIManager.put("Button.font", new Font("Arial", Font.BOLD, 30));
+		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
 		int height = (int) screenSize.getHeight();
